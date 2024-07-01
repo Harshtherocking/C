@@ -16,15 +16,18 @@ void merge (int*arr1, int*arr2, int size1, int size2){
     else {
       // storing right side element to temp
       int temp = *(arr2 + r);
+      *(arr2 + r) = *(arr1 + size1-1);
 
       // shifting left side elements to one place right
-      for (int k = size1-1; k>l; k -- ){
+      for (int k = size1-1; k>l; k --){
         *(arr1 + k) = *(arr1 + k -1);
       }
 
       // taking right side element to left side.
       *(arr1 + l ) = temp;
 
+      // so that l can iterate more to right side by one 
+      size1++;
       l++;
       r++;
     }
@@ -35,7 +38,7 @@ void merge (int*arr1, int*arr2, int size1, int size2){
 // sort operation
 void merge_sort(int * arr, int size){
   // return if a single element
-  if (size ==1) return;
+  if (size == 1) return;
 
   // choosing a midpoint 
   int p = size / 2; 
@@ -51,11 +54,19 @@ void merge_sort(int * arr, int size){
 }
 
 int main (){
-  int a [9] = {7,3,8,3,7,5,6,1,6};
-  int len = 9;
-  merge_sort(a,9);
+  int a [6] = {2,20,25,5,8,17};
+  int len = 6;
 
-  for (int i=0; i<9;i++){
+  printf("before sorting : ");
+  for (int i=0; i<len;i++){
+    printf("%d ", a[i]);
+  }
+  printf("\n");
+
+  merge_sort(a,len);
+
+  printf("after sorting : ");
+  for (int i=0; i<len;i++){
     printf("%d ", a[i]);
   }
   printf("\n");
